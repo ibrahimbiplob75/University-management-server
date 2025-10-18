@@ -7,7 +7,7 @@ import { StudentModel } from '../student/student.model';
 
 
 const createUserIntoDB = async (password: string, studentdata: TStudent) => {
-    console.log("create user into db", password, studentdata);
+    
     const userData:Partial<Tuser>={};
 
     if(!password){
