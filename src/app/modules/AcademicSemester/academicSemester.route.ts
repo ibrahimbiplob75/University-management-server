@@ -5,14 +5,14 @@ import ValidateRequest from '../../Middleware/ValidateRequest';
 
 const router = express.Router();
 
-router.post('/create-semester', academicSemesterControllers.CreateSemesters, ValidateRequest(academicSemesterValidation.CreateacademicSemesterValidation));
+router.post('/create-semester', academicSemesterControllers.createAcademicSemester, ValidateRequest(academicSemesterValidation.CreateacademicSemesterValidation));
 
-router.get('/', academicSemesterControllers.getAllSemesters, ValidateRequest(academicSemesterValidation.CreateacademicSemesterValidation));
+router.get('/', academicSemesterControllers.getAllAcademicSemesters, ValidateRequest(academicSemesterValidation.CreateacademicSemesterValidation));
 
-router.patch('/:semesterId', academicSemesterControllers.updateSemester, ValidateRequest(academicSemesterValidation.updateAcademicSemesterValidationSchema));
+router.patch('/:semesterId', academicSemesterControllers.updateAcademicSemester, ValidateRequest(academicSemesterValidation.updateAcademicSemesterValidationSchema));
 
-router.get('/:semesterId', academicSemesterControllers.getSingleSemester, ValidateRequest(academicSemesterValidation.CreateacademicSemesterValidation));
+router.get('/:semesterId', academicSemesterControllers.getSingleAcademicSemester, ValidateRequest(academicSemesterValidation.CreateacademicSemesterValidation));
 
-router.delete('/:semesterId', academicSemesterControllers.deleteSemester);
+// router.delete('/:semesterId', academicSemesterControllers.deleteAcademicSemester);
 
 export const AcademicSemesterRoutes = router;

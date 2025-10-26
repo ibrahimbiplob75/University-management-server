@@ -16,30 +16,28 @@ const getAllSemesters=async()=>{
     return result;
 }
 
-const getSingleSemester=async(semesterId:string)=>{
-    const result= await AcademicSemester.findById(semesterId);
-    return result;
-}
+const getSingleSemester=async (id: string) => {
+  const result = await AcademicSemester.findById(id);
+  return result;
+};
 
 const deleteSemester=async(semesterId:string)=>{
     await AcademicSemester.findByIdAndDelete(semesterId);
 }
 
-const updateSemester = async (semesterId: string, updateData: Partial<TAcademicSemester>) => {
+const updateSemester = async (id: string, payload: Partial<TAcademicSemester>) => {
     if (
-        updateData.name &&
-        updateData.code &&
-        academicSemesterNameCodeMapper[updateData.name] !== updateData.code
-    ) {
-        throw new Error("Invalid Semester code for the given semester name");
-    }
+    payload.name &&
+    payload.code &&
+    academicSemesterNameCodeMapper[payload.name] !== payload.code
+  ) {
+    throw new Error('Invalid Semester Code');
+  }
 
-    const result = await AcademicSemester.findByIdAndUpdate(
-        semesterId,
-        updateData,
-        { new: true }
-    );
-    return result;
+  const result = await AcademicSemester.findOneAndUpdate({ _id: id }, payload, {
+    new: true,
+  });
+  return result;
 }
 
 export const AcademicSemesterService = {

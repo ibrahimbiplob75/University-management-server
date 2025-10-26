@@ -3,10 +3,13 @@ import { User as UserModel } from './user.model';
 import { Tuser } from './user.interface';
 import { TStudent } from '../student/student.interface';
 import { StudentModel } from '../student/student.model';
+import { AcademicSemester } from '../AcademicSemester/academicSemester.model';
+import { generateStudentId } from './user.utils';
 
 
 
-const createUserIntoDB = async (password: string, studentdata: TStudent) => {
+
+const createUserIntoDB = async (password: string, payload: TStudent) => {
     
     const userData:Partial<Tuser>={};
 
@@ -19,16 +22,21 @@ const createUserIntoDB = async (password: string, studentdata: TStudent) => {
 
     userData.role="student";
 
-    userData.id="2025016204";
+    // find academic semester info
+    const AdmissionSemester = await AcademicSemester.findById(
+        payload.admissionSemester,
+    );
+
+    //set  generated id
+    userData.id = await generateStudentId(AdmissionSemester);
 
     const newUser = await UserModel.create(userData);
-    console.log(newUser,studentdata);
-    
-    if(Object.keys(newUser).length){
-        studentdata.id=newUser.id;
-        studentdata.user=newUser._id;
 
-        const newStudent = await StudentModel.create(studentdata);
+    if (Object.keys(newUser).length) {
+        payload.id = newUser.id;
+        payload.user = newUser._id;
+
+        const newStudent = await StudentModel.create(payload);
 
         return newStudent;
     }

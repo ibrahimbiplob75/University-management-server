@@ -2,9 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import cors from 'cors';
-import express, { Application, NextFunction, Request, Response } from 'express';
-import { StudentRoutes } from './app/modules/student/student.route';
-import { UserRoutes } from './app/modules/user/user.route';
+import express, { Application, Request, Response } from 'express';
 import GlobalErrorHandler from './app/Middleware/globalErrorhandller';
 import NotFoundHandler from './app/Middleware/NotFound';
 import route from './app/Routes';

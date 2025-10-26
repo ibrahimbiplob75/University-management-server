@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {NextFunction, Request, RequestHandler, Response} from "express";
+
 import { UserServices } from "./user.service";
 import sendResponse from "../../utils/ResponseHandaller";
 import httpStatus from "http-status-codes"
